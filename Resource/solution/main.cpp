@@ -24,6 +24,7 @@ void matmul_depend(int M, int N, int P, int BS, int** A, int** B, int** C )
         }
     }
 }
+
 int main ()
 {
     int r_a,c_a,r_b,c_b;

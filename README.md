@@ -1,3 +1,2 @@
-TU-CS683
-
-    Assignment & Term Project
+TC CS683 : Parallel Algorithm
+    @2018 1st Term
