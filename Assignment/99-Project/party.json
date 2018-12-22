@@ -1,14 +1,26 @@
-[
-    {
-        "id": "000",
-		"name": {
-            "th": "",
-            "en": "",
-            "short": ""
+{
+    "party": [
+        {
+            "id": "000",
+            "name": {
+                "th": "P1",
+                "en": "ป1",
+                "short": "ป"
+            },
+            "boss": "xx",
+            "counter": "",
+            "update": ""
         },
-        "date": "",
-        "boss": "",
-        "counter": 5,
-        "update": ""
-    }
-]
+        {
+            "id": "001",
+            "name": {
+                "th": "",
+                "en": "",
+                "short": ""
+            },
+            "boss": "",
+            "counter": "",
+            "update": ""
+        }
+    ]
+}
