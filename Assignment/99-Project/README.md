@@ -30,4 +30,10 @@ Term Project 1st @2018
 		4. นำข้อมูล link ทั้งหมดที่มีใน redis server มาประมวลแบบในข้อ 3 จนกว่าไม่มีข้อมูลที่ visit status = 0 เหลือให้ประมวลผล   
 		   หรือประมวลผลครบ 1,000 รายการแล้ว counter > 1,000 ให้หยุด
 
-		5. update ค่า counter ที่เก็บใน redis server ลงใน json file เมื่อประมวลผลเสร็จทั้งหมดแล้ว
+		5. แสดงข้อมูลแบบ real time
+				- จำนวน popular ของแต่ละพรรค : real time
+				- จำนวนเว็บไซต์ที่ visit มาแล้ว ทั้งหมดของแต่ละพรรค : real time
+				- จำนวนเว็บไซต์ที่ visit มาแล้ว รวมทั้งหมด : real time
+				
+
+		6. update ค่า counter ที่เก็บใน redis server ลงใน json file เมื่อประมวลผลเสร็จทั้งหมดแล้ว

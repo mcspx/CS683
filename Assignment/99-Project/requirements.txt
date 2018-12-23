@@ -1,0 +1,11 @@
+flask
+redis
+flask-socketio
+asyncio
+click
+itsdangerous
+Jinja2
+MarkupSafe
+Werkzeug
+requests
+bs4

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <omp.h>
 using namespace std;
+
 // Assume BS divides N perfectly
 void matmul_depend(int M, int N, int P, int BS, int** A, int** B, int** C )
 {
