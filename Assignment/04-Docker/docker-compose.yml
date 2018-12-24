@@ -2,6 +2,8 @@ version: '3'
 services:
   web:
     build: .
+    environment:
+     - FLASK_ENV=development
     ports:
      - "5005:5005"
     volumes:

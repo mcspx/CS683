@@ -9,6 +9,7 @@ cache = redis.Redis(host='redis', port=6379)
 
 def get_hit_count():
     retries = 5
+    
     while True:
         try:
             return cache.incr('hits')
@@ -23,7 +24,8 @@ def get_hit_count():
 @app.route('/')
 def hello():
     count = get_hit_count()
+
     return 'Hello World! I have been seen {} times.\n'.format(count)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port=5005, debug=True)
