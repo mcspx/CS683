@@ -19,12 +19,12 @@ async def visit(client, queue, sites):
                     link = str(href.get('href'))
 
                     if link.startswith('http'):
-                        if link not in sites:
-                            queue.append(link)
-
-                            #print('New - ', link)
-                        #else:
+                        if link in sites:
+                            pass
                             #print('Dup - ', link)
+                        else:
+                            queue.append(link)
+                            #print('New - ', link)
 
                 sites.append(urls)
 
