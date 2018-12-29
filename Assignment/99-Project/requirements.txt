@@ -2,6 +2,7 @@ flask
 redis
 flask-socketio
 asyncio
+aiohttp
 click
 itsdangerous
 Jinja2

@@ -2,7 +2,6 @@ import time
 import json
 import redis
 
-from flask import Flask
 from flask import Flask, render_template, make_response
 #from flask_socketio import SocketIO
 from time import time

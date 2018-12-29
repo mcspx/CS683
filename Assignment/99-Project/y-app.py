@@ -78,12 +78,14 @@ async def getListPolitical():
     soup = BeautifulSoup(r.content,'html.parser')
     data = soup.findAll(attrs={"class":"multicol"})
     data = data[0].findAll('li')
+    
     political = []
     for li in data:
         a = li.find('a')
         political.append(a.text)
         #print(a.text)
     return political
+
 async def countString(soup,str,n):
     await incSite()
     print("counting..")
@@ -93,6 +95,7 @@ async def countString(soup,str,n):
         cnt_str = cnt_str + b.text.count(str)
     await countArticle(cnt_str,n)
     #print('total cnt str(',str,') = ',cnt_str)
+
 async def countArticle(cnt,n=0):
     key = "n"+str(n)
     r = redis.Redis(host='0.0.0.0', port=8008, db=0)
@@ -103,6 +106,7 @@ async def countArticle(cnt,n=0):
         cnt = int(r.get(key)) + cnt
         r.set(key,cnt)
     #print(int(r.get("n1")))
+
 async def incSite():
     r = redis.Redis(host='0.0.0.0', port=8008, db=0)
     r.set('totalSite',int(r.get('totalSite'))+1)
@@ -111,7 +115,7 @@ async def main():
     #total =0
     url = 'https://www.google.co.th/search?q='
     # 10 political
-    political = ['พรรคประชาธิปัตย์','พรรคประชากรไทย','พรรคมหาชน','พรรคกสิกรไทย','พรรคเพื่อฟ้าดิน','พรรคความหวังใหม่','พรรคเครือข่ายชาวนาแห่งประเทศไทย','พรรคเพื่อไทย','พรรคเพื่อแผ่นดิน','พรรคชาติพัฒนา']
+    #political = ['พรรคประชาธิปัตย์','พรรคประชากรไทย','พรรคมหาชน','พรรคกสิกรไทย','พรรคเพื่อฟ้าดิน','พรรคความหวังใหม่','พรรคเครือข่ายชาวนาแห่งประเทศไทย','พรรคเพื่อไทย','พรรคเพื่อแผ่นดิน','พรรคชาติพัฒนา']
     political = await getListPolitical()
     print(len(political))
     #url = 'https://en.wikipedia.org/wiki/'

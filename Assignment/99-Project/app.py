@@ -1,10 +1,34 @@
 import asyncio
 import aiohttp
 import json
-import time
 import queue
+import os
 
-from bs4 import BeautifulSoup
+from flask  import Flask, render_template, make_response
+from redis  import Redis
+from time   import time
+from random import random
+from bs4    import BeautifulSoup
+
+app = Flask(__name__)
+
+REDIS_HOST = os.environ['REDIS_HOST']
+REDIS_PORT = os.environ['REDIS_PORT']
+
+redis = Redis(host=REDIS_HOST, port=REDIS_PORT)
+
+async def party():
+    partyList = []
+
+    with open('party.json') as json_file:
+        data = json.load(json_file)
+
+        for p in data['party']:
+            partyList.append(p['name']["th"])
+            print('U: ' + p['id'])
+            print('S: ' + p['name']["th"])
+            print('P: ' + p['name']["short"])
+            print('')
 
 async def visit(client, queue, sites):
     try:
@@ -53,31 +77,34 @@ async def main(queue, sites):
             else:
                 print("Visit error !")
 
-        
+@app.route('/')
+def hello():
+    redis.incr('hits')
+    return 'Redis ({}) hit counter: {}'.format(REDIS_HOST, redis.get('hits'))
+
+@app.route('/live')
+def hello_world():
+    return render_template('index.html', data='test')
+
+@app.route('/live-data')
+def live_data():
+    data = [time() * 1000, random() * 100]
+    
+    response = make_response(json.dumps(data))
+    response.content_type = 'application/json'
+    return response
 
 if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True)
+
     elapsed_start = time.time()
 
-    queue = ['https://en.wikipedia.org/wiki/Main_Page']
-    sites = []
+    #queue = ['https://en.wikipedia.org/wiki/Main_Page']
+    #sites = []
 
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main(queue, sites))
+    #loop = asyncio.get_event_loop()
+    #loop.run_until_complete(main(queue, sites))
 
     elapsed_finish = time.time()
 
     print('Elapsed :', (elapsed_finish - elapsed_start), 'seconds.')
-
-
-'''
-
-with open('party.json') as json_file:
-    data = json.load(json_file)
-
-    for p in data['party']:
-        print('U: ' + p['id'])
-        print('S: ' + p['name']["th"])
-        print('P: ' + p['name']["short"])
-        print('')
-
-'''
